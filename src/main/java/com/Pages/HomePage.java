@@ -1,17 +1,18 @@
 package com.Pages;
 
-import com.microsoft.playwright.Page;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import com.microsoft.playwright.Page;
 
 public class HomePage {
 
     private Page page;
 
-    private String searchBox = "#twotabsearchtextbox";
-    private String searchButton = "input#nav-search-submit-button";
+    private String changeCountryDropdown = "Expand to Change Language or Country";
+    private String changeCountryButton = "Change country/region.";
+    private String countryDropDown = "#icp-dropdown-selected-item-prompt";
+    private String optionForIndia = "#icp-dropdown_8"; //"option:has-text('India')";
+    private String loadingWebsite = "button:has-text('Go to website')";
 
-    Page searchResults;
 
 
 
@@ -27,13 +28,22 @@ public class HomePage {
         return page.url();
     }
 
-    public SearchResultsPage searchItems(String items) throws InterruptedException {
-        page.fill(searchBox , items);
-        page.click(searchButton);
-        // return search page that will open when search button is clicked
-        return new SearchResultsPage(page);
-        // since we want to verify if search items are displayed correctly pass page as parameter
+    public Page changeCountry(){
+        page.getByLabel(changeCountryDropdown).first().click();
+        page.getByText(changeCountryButton).last().click();
+        page.locator(countryDropDown).click();
+        page.locator(optionForIndia).isVisible();
+        page.locator(optionForIndia).click();
+        Page newPage = page.waitForPopup(() -> {
+            page.locator(loadingWebsite).click();
+        });
+
+        return newPage;
+
     }
+
+
+
 
 
 

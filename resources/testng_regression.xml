@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-        <suite name="Amazon automation suite">
+<suite name="Amazon automation suite" parallel="false">
 
-            <test name="Home Page Landing">
-                <parameter name="browser" value="chrome"/>
-                <classes>
-                    <class name="com.Tests.HomePageTests"/>
-                </classes>
-            </test>
+    <test name="Amazon Test Flow" preserve-order="true">
 
-            <test name="Search Results verification">
-                <parameter name="browser" value="chrome"/>
-                <classes>
-                    <class name="com.Tests.SearchResultsPageTest"/>
-                </classes>
-            </test>
+        <parameter name="browser" value="chrome"/>
 
-        </suite>
+        <classes>
+            <class name="com.Tests.HomePageTests"/>
+        </classes>
 
+    </test>
+
+</suite>

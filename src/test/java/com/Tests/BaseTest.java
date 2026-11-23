@@ -1,12 +1,13 @@
 package com.Tests;
 
+import com.Pages.CartPage;
 import com.Pages.HomePage;
+import com.Pages.SearchResultsPage;
 import com.microsoft.playwright.Page;
 import org.example.PlaywrightFactory;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+
 
 import java.io.IOException;
 import java.util.Properties;
@@ -16,6 +17,8 @@ public class BaseTest {
     PlaywrightFactory pf;
     Page page;
     HomePage homePage;
+    SearchResultsPage searchPage;
+    CartPage cartPage;
     Properties prop;
 
     @BeforeClass
@@ -24,8 +27,11 @@ public class BaseTest {
         prop = pf.initProperties();
         page = pf.initBrowser(prop);
         homePage = new HomePage(page);
-        System.out.println(">>> HomePage initialized: " + homePage);
+        searchPage = new SearchResultsPage(page);
+        cartPage = new CartPage(page);
+
     }
+
 
 
     @AfterClass
